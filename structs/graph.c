@@ -13,17 +13,23 @@
 Graph* startGraph(void){
 	size_t graphSize = sizeof(Graph);
 	Graph *g = NULL;
+	// Allocate the graph, clear the memory in it and return it
 	if((g = (Graph*)malloc(graphSize))==NULL){
 		perror("malloc");
+		return NULL;
 	}
+	memset(g, '\0', graphSize);
 	return g;
 }
 
 Graph* addNodeToGraph(Graph *graph, int nodeId){
 	Graph *g = graph;
 
-	if(g == NULL)
+	if(g == NULL) // If the graph is NULL, create it
 		g = startGraph();
+	// Now search if the node already exists
+	if(findNode(g->nodes, nodeId) != NULL) // If it exists, simply return
+		return g;
 	g->nodes = addNode(g->nodes, nodeId);
 	g->numNodes++;
 
@@ -35,6 +41,7 @@ Graph* addEdgeToGraph(Graph *graph, int startNodeId, int endNodeId, float weight
 	Node *startNode = NULL;
 	Node *endNode = NULL;
 
+	// If the graph is NULL, return an error
 	if(g == NULL){
 		fprintf(stderr,"Uninitialized graph, please add the nodes first!\n");
 		return NULL;
@@ -42,6 +49,7 @@ Graph* addEdgeToGraph(Graph *graph, int startNodeId, int endNodeId, float weight
 	//Find the nodes pointer
 	startNode = findNode(graph->nodes, startNodeId);
 	endNode = findNode(graph->nodes, endNodeId);
+	// Create and add the Edge
 	g->edges = addEdge(g->edges, startNode, endNode, weight);
 	g->numEdges++;
 

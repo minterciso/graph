@@ -14,6 +14,7 @@ Edge *createEdge(void){
 	size_t edgeSize = sizeof(Edge);
 	Edge *newEdge = NULL;
 
+	// If possible, allocate the new edge memory and clear it
 	if((newEdge=(Edge*)malloc(edgeSize))==NULL){
 		perror("malloc");
 		return NULL;
@@ -28,14 +29,15 @@ Edge* addEdge(Edge *edges, Node *nodeStart, Node *nodeEnd, float weight){
 	newEdge->start = nodeStart;
 	newEdge->end = nodeEnd;
 	newEdge->weight = weight;
-	newEdge->next = NULL;
 
 	if(edges == NULL)
 		edges = newEdge;
 	else{
+		// If the edges is not NULL, than we need to go to the end of the linked list
 		tmp = edges;
 		while(tmp->next)
 			tmp = tmp->next;
+		// Now add the new edge
 		newEdge->prev = tmp;
 		tmp->next = newEdge;
 	}
@@ -45,6 +47,7 @@ Edge* addEdge(Edge *edges, Node *nodeStart, Node *nodeEnd, float weight){
 void clearEdges(Edge* l){
 	Edge *edge = l;
 	Edge *tmp = NULL;
+	// Walk the list and clear all the edges
 	while(edge){
 		tmp = edge;
 		edge = edge->next;
