@@ -11,12 +11,11 @@
 
 typedef struct node_list{
 	int id;
-	float weight;
 	struct node_list *next;
 	struct node_list *prev;
 }Node;
 
-Node* addNode(Node *nodes, int id, float weight);
+Node* addNode(Node *nodes, int id);
 
 Node *findNode(Node *nodes, int id);
 

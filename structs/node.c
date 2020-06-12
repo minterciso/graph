@@ -22,11 +22,10 @@ Node *createNode(void){
 	return newNode;
 }
 
-Node* addNode(Node *nodes, int id, float weight){
+Node* addNode(Node *nodes, int id){
 	Node *newNode = createNode();
 	Node *tmp = NULL;
 	newNode->id = id;
-	newNode->weight = weight;
 	newNode->next = NULL;
 
 	if(nodes == NULL)

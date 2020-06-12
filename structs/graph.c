@@ -24,7 +24,7 @@ Graph* addNodeToGraph(Graph *graph, int nodeId){
 
 	if(g == NULL)
 		g = startGraph();
-	g->nodes = addNode(g->nodes, nodeId, -1);
+	g->nodes = addNode(g->nodes, nodeId);
 	g->numNodes++;
 
 	return g;
