@@ -5,6 +5,9 @@
  *      Author: Mateus Interciso
  */
 #include "sample.h"
+#include "../structs/node.h"
+#include "../structs/edge.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -32,3 +35,27 @@ Graph* createSampleGraph(void){
 	return graph;
 }
 
+void printGraph(Graph *g){
+	Node *node = NULL;
+	Edge *edge = NULL;
+
+	if(g == NULL){
+		fprintf(stderr,"Invalid graph!\n");
+		return;
+	}
+	//Now print the nodes information
+	fprintf(stdout,"[*] Node information:");
+	node = g->nodes;
+	while(node){
+		fprintf(stdout," %d",node->id);
+		node=node->next;
+	}
+	fprintf(stdout,"\n");
+	fprintf(stdout,"[*] Edge information:\n");
+	edge = g->edges;
+	while(edge){
+		fprintf(stdout,"\t(%d)-%2.2f->(%d)\n", edge->start->id, edge->weight, edge->end->id);
+		edge = edge->next;
+	}
+	fprintf(stdout,"\n");
+}

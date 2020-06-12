@@ -15,5 +15,10 @@
  */
 Graph* createSampleGraph(void);
 
+/**
+ * @brief Print the graph, in the most simple way possible.
+ */
+void printGraph(Graph *g);
+
 
 #endif /* SAMPLE_H_ */

@@ -11,6 +11,7 @@
 int main(int argc, char *argv[]){
 	Graph *graph = NULL;
 	graph = createSampleGraph();
+	printGraph(graph);
 
 	clearGraph(graph);
 	return EXIT_SUCCESS;
