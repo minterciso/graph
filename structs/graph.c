@@ -56,6 +56,50 @@ Graph* addEdgeToGraph(Graph *graph, int startNodeId, int endNodeId, float weight
 	return g;
 }
 
+int* neighbors(Graph *graph, int nodeId){
+	int *neighbors_id= NULL;
+	Node *sourceNode = NULL;
+	Edge *tmp = NULL;
+	int idx = 0;
+
+	if(graph == NULL){
+		fprintf(stderr,"Invalid graph!\n");
+		return NULL;
+	}
+
+	sourceNode = findNode(graph->nodes, nodeId);
+	if(sourceNode == NULL){
+		fprintf(stderr,"Unable to find node '%d'\n", nodeId);
+		return NULL;
+	}
+
+	// Allocate memory for the neighbors list
+	if((neighbors_id = (int*)malloc(sizeof(int)*graph->numNodes))==NULL){
+		perror("malloc");
+		return NULL;
+	}
+	memset(neighbors_id, -1, sizeof(int)*graph->numNodes);
+
+	tmp = graph->edges;
+	int found = 0;
+	while(tmp){
+		if(tmp->start->id == nodeId){
+			for(int i=0;i<graph->numNodes;i++){
+				if(neighbors_id[i] == tmp->end->id){
+					found = 1;
+					break;
+				}
+			}
+			if(found == 0)
+				neighbors_id[idx++] = tmp->end->id;
+			found = 0;
+		}
+		tmp=tmp->next;
+	}
+
+	return neighbors_id;
+}
+
 void clearGraph(Graph *g){
 	if(g == NULL)
 		return;

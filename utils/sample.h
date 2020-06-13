@@ -16,6 +16,12 @@
 Graph* createSampleGraph(void);
 
 /**
+ * @brief Create a sample small graph used on the hamilton cycle algorithm
+ * @return A pointer to a sample small graph
+ */
+Graph* createHamiltonSample(void);
+
+/**
  * @brief Print the graph, in the most simple way possible.
  */
 void printGraph(Graph *g);

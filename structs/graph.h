@@ -38,6 +38,14 @@ Graph* addNodeToGraph(Graph *graph, int nodeId);
 Graph* addEdgeToGraph(Graph *graph, int startNodeId, int endNodeId, float weight);
 
 /**
+ * @brief Returns a list of neighbors of the passed node id
+ * @parameter graph An already initialized graph
+ * @parameter nodeId The id of the node
+ * @return NULL if the node was not found (or it has no neighbor) or a list of id's for each neighbor. You must free this pointer.
+ */
+int* neighbors(Graph *graph, int nodeId);
+
+/**
  * @brief Clear the memory used when creating the graph
  * @parameter g A pointer to the created graph
  */

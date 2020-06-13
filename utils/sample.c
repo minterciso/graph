@@ -35,6 +35,38 @@ Graph* createSampleGraph(void){
 	return graph;
 }
 
+Graph* createHamiltonSample(void){
+	Graph *graph = NULL;
+	fprintf(stdout, "[*] Creating 5 nodes...");
+	for(int i=0;i<5;i++)
+		graph = addNodeToGraph(graph, i+1);
+	fprintf(stdout,"Done!\n");
+	fprintf(stdout,"[*] Creating edges");
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 5, 4, 0);
+	graph = addEdgeToGraph(graph, 4, 5, 0);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 5, 3, 0);
+	graph = addEdgeToGraph(graph, 3, 5, 0);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 4, 2, 0);
+	graph = addEdgeToGraph(graph, 2, 4, 0);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 4, 1, 0);
+	graph = addEdgeToGraph(graph, 1, 4, 0);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 2, 1, 0);
+	graph = addEdgeToGraph(graph, 1, 2, 0);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 3, 1, 0);
+	graph = addEdgeToGraph(graph, 1, 3, 0);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 3, 5, 0);
+	graph = addEdgeToGraph(graph, 5, 3, 0);
+	fprintf(stdout,"[*] Done!\n");
+	return graph;
+}
+
 void printGraph(Graph *g){
 	Node *node = NULL;
 	Edge *edge = NULL;
