@@ -32,6 +32,12 @@ Graph* createSampleGraph(void){
 	fprintf(stdout,"4->1 (70)\n");fflush(stdout);
 	graph = addEdgeToGraph(graph, 4, 1, 70);
 	fprintf(stdout,"[*] Done!\n");
+	fprintf(stdout,"[*] Configuring all neighbors...");fflush(stdout);
+	Node *tmp = graph->nodes;
+	while(tmp){
+		tmp->neighbors = neighbors(graph, tmp->id);
+		tmp=tmp->next;
+	}
 	return graph;
 }
 
@@ -64,6 +70,12 @@ Graph* createHamiltonSample(void){
 	graph = addEdgeToGraph(graph, 3, 5, 0);
 	graph = addEdgeToGraph(graph, 5, 3, 0);
 	fprintf(stdout,"[*] Done!\n");
+	fprintf(stdout,"[*] Configuring all neighbors...");fflush(stdout);
+	Node *tmp = graph->nodes;
+	while(tmp){
+		tmp->neighbors = neighbors(graph, tmp->id);
+		tmp=tmp->next;
+	}
 	return graph;
 }
 

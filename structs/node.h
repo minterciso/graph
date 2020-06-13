@@ -11,6 +11,8 @@
 /// Basic definition of a node (a simple double linked list to add n nodes) with id information
 typedef struct node_list{
 	int id;						/// The id information of the node
+	int visited;				/// This is used on the hamiltonian cycle
+	int *neighbors;				/// This is used on the hamiltonian cycle
 	struct node_list *next;		/// A pointer to the next node
 	struct node_list *prev;		/// A pointer to the previous node
 }Node;

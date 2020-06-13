@@ -68,6 +68,8 @@ void clearNodes(Node* l){
 	while(node){
 		tmp = node;
 		node = node->next;
+		if(tmp->neighbors)
+			free(tmp->neighbors);
 		free(tmp);
 	}
 	if(node)
