@@ -12,32 +12,49 @@
 #include "algorithms/tsp.h"
 
 int main(int argc, char *argv[]){
-	Graph *graph = NULL;
-	graph = createTSPSample();
-	int tspResult = 0;
+	Graph *hamiltonGraph = NULL;
+	Graph *tspGraph = NULL;
 	int *tspWalk = NULL;
-	if((tspWalk=(int*)malloc(sizeof(int)*graph->numNodes))==NULL){
+	int tspCost = 0;
+	Node *hamiltonSolution = NULL;
+
+	fprintf(stdout,"[*] Allocating memory for all algorithms...\n");
+	fprintf(stdout,"[*] === Hamilton Cycle Graph ===\n");
+	hamiltonGraph = createHamiltonSample();
+	fprintf(stdout,"[*] === TSP Graph ===\n");
+	tspGraph = createTSPSample();
+	if((hamiltonSolution=(Node*)malloc(sizeof(Node)*hamiltonGraph->numNodes))==NULL){
 		perror("malloc");
 		return EXIT_FAILURE;
 	}
-	memset(tspWalk, '0', sizeof(int)*graph->numNodes);
-
-	printGraph(graph);
-
-	tspResult = tsp(graph, 0, tspWalk);
-	if(tspResult < 0)
-		fprintf(stdout,"TSP is not possible!\n");
+	if((tspWalk=(int*)malloc(sizeof(int)*tspGraph->numNodes))==NULL){
+		perror("malloc");
+		return EXIT_FAILURE;
+	}
+	fprintf(stdout,"[*] Executing Hamilton Cyclo algorithm...\n");fflush(stdout);
+	if(hamiltonCycle(hamiltonGraph, hamiltonSolution) == 0)
+		fprintf(stdout,"[*] There's no hamilton cycle available!\n");
 	else{
-		fprintf(stdout,"Best tour:");
-		for(int i=0;i<graph->numNodes;i++)
+		fprintf(stdout,"[*] There's a hamilgon cycle available:");
+		for(int i=0;i<hamiltonGraph->numNodes;i++)
+			fprintf(stdout, " %d",hamiltonSolution[i].id);
+	}
+	fprintf(stdout,"\n[*] Executing TSP algorithm...\n");
+	tspCost = tsp(tspGraph, 0, tspWalk);
+	if(tspCost < 0)
+		fprintf(stdout,"[*] TSP is not possible!\n");
+	else{
+		fprintf(stdout,"[*] Best tour:");
+		for(int i=0;i<tspGraph->numNodes;i++)
 			fprintf(stdout," %d", tspWalk[i]);
-		fprintf(stdout,"\nTour Cost: %d", tspResult);
+		fprintf(stdout,"\n[*] Tour Cost: %d\n", tspCost);
 	}
 
-
-	clearGraph(graph);
-	if(tspWalk)
-		free(tspWalk);
+	fprintf(stdout,"[*] Freeing memory\n");
+	clearGraph(tspGraph);
+	clearGraph(hamiltonGraph);
+	free(tspWalk);
+	free(hamiltonSolution);
 
 	return EXIT_SUCCESS;
 }

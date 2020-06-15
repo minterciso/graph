@@ -47,7 +47,7 @@ Graph* createHamiltonSample(void){
 	for(int i=0;i<5;i++)
 		graph = addNodeToGraph(graph, i+1);
 	fprintf(stdout,"Done!\n");
-	fprintf(stdout,"[*] Creating edges");
+	fprintf(stdout,"[*] Creating edges");fflush(stdout);
 	fprintf(stdout,"."); fflush(stdout);
 	graph = addEdgeToGraph(graph, 5, 4, 0);
 	graph = addEdgeToGraph(graph, 5, 3, 0);
@@ -64,6 +64,7 @@ Graph* createHamiltonSample(void){
 	fprintf(stdout,"."); fflush(stdout);
 	graph = addEdgeToGraph(graph, 1, 3, 0);
 	graph = addEdgeToGraph(graph, 1, 2, 0);
+	fprintf(stdout,"Done!\n");fflush(stdout);
 
 	fprintf(stdout,"[*] Configuring all neighbors...");fflush(stdout);
 	Node *tmp = graph->nodes;
@@ -71,6 +72,7 @@ Graph* createHamiltonSample(void){
 		tmp->neighbors = neighbors(graph, tmp->id);
 		tmp=tmp->next;
 	}
+	fprintf(stdout,"Done!\n"); fflush(stdout);
 	return graph;
 }
 
@@ -95,7 +97,7 @@ Graph* createTSPSample(void){
 	fprintf(stdout,"."); fflush(stdout);
 	graph = addEdgeToGraph(graph, 3, 1, 10);
 	graph = addEdgeToGraph(graph, 3, 2, 4);
-	fprintf(stdout,"[*] Done!\n");
+	fprintf(stdout,"Done!\n");
 
 	fprintf(stdout,"[*] Configuring all neighbors...");fflush(stdout);
 	Node *tmp = graph->nodes;
@@ -103,6 +105,7 @@ Graph* createTSPSample(void){
 		tmp->neighbors = neighbors(graph, tmp->id);
 		tmp=tmp->next;
 	}
+	fprintf(stdout,"Done!\n"); fflush(stdout);
 	return graph;
 }
 
