@@ -109,6 +109,39 @@ Graph* createTSPSample(void){
 	return graph;
 }
 
+Graph* createDijkstraSample(void){
+	Graph *graph = NULL;
+	fprintf(stdout, "[*] Creating 6 nodes...");
+	for(int i=0;i<6;i++)
+		graph = addNodeToGraph(graph, i);
+	fprintf(stdout,"Done!\n");
+	fprintf(stdout,"[*] Creating edges");
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 0, 1, 10);
+	graph = addEdgeToGraph(graph, 0, 2, 5);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 1, 3, 1);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 2, 1, 3);
+	graph = addEdgeToGraph(graph, 2, 3, 8);
+	graph = addEdgeToGraph(graph, 2, 4, 2);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 3, 4, 4);
+	graph = addEdgeToGraph(graph, 3, 5, 4);
+	fprintf(stdout,"."); fflush(stdout);
+	graph = addEdgeToGraph(graph, 4, 5, 6);
+	fprintf(stdout,"Done!\n");
+
+	fprintf(stdout,"[*] Configuring all neighbors...");fflush(stdout);
+	Node *tmp = graph->nodes;
+	while(tmp){
+		tmp->neighbors = neighbors(graph, tmp->id);
+		tmp=tmp->next;
+	}
+	fprintf(stdout,"Done!\n"); fflush(stdout);
+	return graph;
+}
+
 void printGraph(Graph *g){
 	Node *node = NULL;
 	Edge *edge = NULL;

@@ -28,6 +28,12 @@ Graph* createHamiltonSample(void);
 Graph* createTSPSample(void);
 
 /**
+ * @brief Create a sample small graph used on the Dijksta algorithm
+ * @return A pointer to a sample small graph
+ */
+Graph* createDijkstraSample(void);
+
+/**
  * @brief Print the graph, in the most simple way possible.
  */
 void printGraph(Graph *g);

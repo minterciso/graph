@@ -11,6 +11,10 @@
 #include "node.h"
 #include "edge.h"
 
+#include <limits.h>
+
+#define INFINITY INT_MAX / 2  // Very large number to represent the infinity
+
 /// Simple graph information
 typedef struct {
 	int numNodes;		/// The amount of nodes on the graph

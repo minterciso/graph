@@ -109,6 +109,7 @@ int tsp(Graph *g, int start, int *walk){
 		free(distance[i]);
 	}
 	free(distance);
+	free(visited);
 
 	if(valueBestSolution < INFINITY) return valueBestSolution;
 	return -1;

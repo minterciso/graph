@@ -30,6 +30,8 @@ int distanceMatrix(Graph *g, int **distance){
 			tmp = findEdge(g->edges, start, end);
 			if(tmp != NULL)
 				dist = tmp->weight;
+			if(i==j)
+				dist = 0;
 			distance[i][j] = dist;
 		}
 	}
