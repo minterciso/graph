@@ -9,6 +9,7 @@
 #include <string.h>
 #include "utils/sample.h"
 #include "algorithms/hamiltonian.h"
+#include "algorithms/tsp.h"
 
 int main(int argc, char *argv[]){
 	Graph *graph = NULL;
