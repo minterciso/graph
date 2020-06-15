@@ -13,7 +13,7 @@
 typedef struct edge_list{
 	Node *start;				/// The start node
 	Node *end;					/// The end node
-	float weight;				/// The edge weight
+	int weight;				/// The edge weight
 	struct edge_list *next;		/// A pointer to the next edge
 	struct edge_list *prev;		/// A pointer to the previous edge
 }Edge;
@@ -26,7 +26,16 @@ typedef struct edge_list{
  * @parameter weight The weight of the edge
  * @return A pointer to a newly allocated Edge list, or the same as edges
  */
-Edge* addEdge(Edge *edges, Node *nodeStart, Node *nodeEnd, float weight);
+Edge* addEdge(Edge *edges, Node *nodeStart, Node *nodeEnd, int weight);
+
+/**
+ * @brief Returns the edge that starts at nodeStart, and stops at nodeEnd
+ * @parameter edges The list of edges
+ * @parameter nodeStart The initial Node
+ * @parameter nodeEnd The ending Node
+ * @return A pointer to the Edge found, NULL otherwise
+ */
+Edge* findEdge(Edge *edges, Node *nodeStart, Node *nodeEnd);
 
 /**
  * @brief Clear the memory used on the Edge double linked list

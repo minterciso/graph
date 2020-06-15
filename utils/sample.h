@@ -22,6 +22,12 @@ Graph* createSampleGraph(void);
 Graph* createHamiltonSample(void);
 
 /**
+ * @brief Create a sample small graph used on the TSP algorithm
+ * @return A pointer to a sample small graph
+ */
+Graph* createTSPSample(void);
+
+/**
  * @brief Print the graph, in the most simple way possible.
  */
 void printGraph(Graph *g);

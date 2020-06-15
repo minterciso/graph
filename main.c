@@ -12,34 +12,31 @@
 
 int main(int argc, char *argv[]){
 	Graph *graph = NULL;
-	graph = createSampleGraph();
-	int hasHamiltonCycle = 0;
-
-	printGraph(graph);
-
-	fprintf(stdout,"[*] Starting Hamilton Cycle algorithm...\n");fflush(stdout);
-	Node *hamiltonSolution = NULL;
-	size_t hamiltonSolutionSize = sizeof(Node)*graph->numNodes;
-	if((hamiltonSolution=(Node*)malloc(hamiltonSolutionSize))==NULL){
+	graph = createTSPSample();
+	int tspResult = 0;
+	int *tspWalk = NULL;
+	if((tspWalk=(int*)malloc(sizeof(int)*graph->numNodes))==NULL){
 		perror("malloc");
 		return EXIT_FAILURE;
 	}
-	memset(hamiltonSolution, '\0', hamiltonSolutionSize);
-	hasHamiltonCycle = hamiltonCycle(graph, hamiltonSolution);
-	if(hasHamiltonCycle == 1){
-		fprintf(stdout,"[*] There's a Hamilton Cycle available!\n");
-		fprintf(stdout,"[*] Cycle:");
+	memset(tspWalk, '0', sizeof(int)*graph->numNodes);
+
+	printGraph(graph);
+
+	tspResult = tsp(graph, 0, tspWalk);
+	if(tspResult < 0)
+		fprintf(stdout,"TSP is not possible!\n");
+	else{
+		fprintf(stdout,"Best tour:");
 		for(int i=0;i<graph->numNodes;i++)
-			fprintf(stdout," %d", hamiltonSolution[i].id);
-		fprintf(stdout,"\n");
+			fprintf(stdout," %d", tspWalk[i]);
+		fprintf(stdout,"\nTour Cost: %d", tspResult);
 	}
-	else
-		fprintf(stdout,"[*] There's no Hamilton Cycle available!\n");
-	fflush(stdout);
-	if(hamiltonSolution!=NULL)
-		free(hamiltonSolution);
+
 
 	clearGraph(graph);
+	if(tspWalk)
+		free(tspWalk);
 
 	return EXIT_SUCCESS;
 }

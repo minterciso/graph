@@ -23,7 +23,7 @@ Edge *createEdge(void){
 	return newEdge;
 }
 
-Edge* addEdge(Edge *edges, Node *nodeStart, Node *nodeEnd, float weight){
+Edge* addEdge(Edge *edges, Node *nodeStart, Node *nodeEnd, int weight){
 	Edge *newEdge = createEdge();
 	Edge *tmp = NULL;
 	newEdge->start = nodeStart;
@@ -42,6 +42,23 @@ Edge* addEdge(Edge *edges, Node *nodeStart, Node *nodeEnd, float weight){
 		tmp->next = newEdge;
 	}
 	return edges;
+}
+
+Edge* findEdge(Edge *edges, Node *nodeStart, Node *nodeEnd){
+	if(edges==NULL || nodeStart == NULL || nodeEnd == NULL){
+		fprintf(stderr,"Invalid parameters\n");
+		return NULL;
+	}
+	Edge *found = NULL;
+	Edge *tmp = edges;
+	while(tmp){
+		if(tmp->start->id == nodeStart->id && tmp->end->id == nodeEnd->id){
+			found = tmp;
+			break;
+		}
+		tmp=tmp->next;
+	}
+	return found;
 }
 
 void clearEdges(Edge* l){
