@@ -13,11 +13,14 @@
 #include "algorithms/hamiltonian.h"
 #include "algorithms/tsp.h"
 #include "algorithms/dijkstra.h"
+#include "algorithms/depth_first_search.h"
 
 int main(int argc, char *argv[]){
 	Graph *hamiltonGraph = NULL;
 	Graph *tspGraph = NULL;
 	Graph *dijkstraGraph = NULL;
+	Graph *searchGraph = NULL;
+	int dfsResult, bfsResult;
 	int *tspWalk = NULL;
 	int tspCost = 0;
 	Node *hamiltonSolution = NULL;
@@ -32,6 +35,8 @@ int main(int argc, char *argv[]){
 	tspGraph = createTSPSample();
 	fprintf(stdout,"[*] === Dijkstra Graph ===\n");
 	dijkstraGraph = createDijkstraSample();
+	fprintf(stdout,"[*] === Search Graphs ===\n");
+	searchGraph = createSearchSample();
 	fprintf(stdout,"[*] Placeholders...");
 	if((hamiltonSolution=(Node*)malloc(sizeof(Node)*hamiltonGraph->numNodes))==NULL){
 		perror("malloc");
@@ -82,6 +87,12 @@ int main(int argc, char *argv[]){
 			fprintf(stdout," %d", dijkstraPredecessors[i]);
 		fprintf(stdout,"\n");
 	}
+	fprintf(stdout,"[*] Executing Depth First Search algorithm...\n");
+	Node *start = findNode(searchGraph->nodes, 5);
+	Node *end = findNode(searchGraph->nodes, 2);
+	dfsResult = depthFirstSearch(searchGraph, start, end);
+	fprintf(stdout,"[*] DFS Result: %d\n", dfsResult);
+
 
 	fprintf(stdout,"[*] Freeing memory\n");
 	free(tspWalk);
@@ -91,6 +102,7 @@ int main(int argc, char *argv[]){
 	clearGraph(tspGraph);
 	clearGraph(hamiltonGraph);
 	clearGraph(dijkstraGraph);
+	clearGraph(searchGraph);
 
 
 	return EXIT_SUCCESS;
